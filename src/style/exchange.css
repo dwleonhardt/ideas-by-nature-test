@@ -28,6 +28,16 @@ div {
   text-align: center;
   border: 1px solid gray;
   border-radius: 3px;
+  outline: none;
+  -webkit-transition: all 0.30s ease-in-out;
+  -moz-transition: all 0.30s ease-in-out;
+  -ms-transition: all 0.30s ease-in-out;
+  -o-transition: all 0.30s ease-in-out;
+}
+
+.input:focus {
+  border: 1px solid #005e80;
+  box-shadow: 0 0 2px #005e80;
 }
 
 .submit {
@@ -39,7 +49,6 @@ div {
   background-color: #0099cc;
   border: 1px solid #0099cc;
   border-radius: 3px;
-  outline: none;
   transition: background-color 0.2s ease;
 }
 
