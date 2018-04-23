@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { SomethingAmazing } from '../actions/SomethingAmazing';
+import style from '../style/exchange.css';
 
 class Home extends Component {
 
@@ -12,7 +13,7 @@ class Home extends Component {
     return (
       <div>
         <h1>{this.props.input}</h1>
-        <input placeholder="somethingamazing" onChange={ e => this.amazingHandler(e)} />
+        <input className={style.input} placeholder="somethingamazing" onChange={ e => this.amazingHandler(e)} />
       </div>
     )
 

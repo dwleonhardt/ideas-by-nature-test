@@ -1,5 +1,7 @@
 const webpack = require('webpack');
-const path = require('path')
+const path = require('path');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+
 
 module.exports = {
   entry: './src/app.js',
@@ -12,11 +14,21 @@ module.exports = {
       test: /\.(js|jsx)$/,
       loader: 'babel-loader',
       exclude: /node_modules/
-    }, {
+    },
+    {
       test: /\.s?css$/,
       use: [
-        'style-loader',
-        'css-loader',
+        {
+          loader: 'style-loader',
+        },
+        {
+          loader: 'css-loader',
+          options: {
+            sourceMap: true,
+            modules: true,
+            localIdentName: '[local]___[hash:base64:5]'
+          }
+        }
       ]
     } ]
   },
