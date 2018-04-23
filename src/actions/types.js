@@ -1,1 +1,1 @@
-export const SOMETHING_AMAZING = 'something_amazing'
+export const EXCHANGE_SEND = 'something_amazing'

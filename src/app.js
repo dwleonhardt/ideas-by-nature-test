@@ -2,10 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import store from './store';
-import Home from './components/Home';
+import Exchange from './components/Exchange';
 
 ReactDOM.render(
   <Provider store={ store }>
-    <Home />
+    <Exchange />
   </Provider>,
 document.getElementById('root'));
