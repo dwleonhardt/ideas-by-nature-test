@@ -12,8 +12,13 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <input className={style.input} placeholder="Send" onChange={ e => this.sendHandler(e)} />
-        <input className={style.input} placeholder="Recieve" />
+        <form className={style.exchangeForm}>
+          <div className={style.inputs}>
+            <input className={style.input} placeholder="Send" onChange={ e => this.sendHandler(e)} />
+            <input className={style.input} placeholder="Recieve" />
+          </div>
+          <button className={style.submit} type="button">Submit</button>
+        </form>
       </div>
     )
 

@@ -1,3 +1,48 @@
+div {
+  display: flex;
+  justify-content: center;
+}
+
+.exchangeForm {
+  display: flex;
+  width: 55vw;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20vh;
+  padding: 10vw 5vw 5vw 5vw;
+  border: 1px solid #808080;
+  border-radius: 5px;
+}
+
+.inputs {
+  display: flex;
+  width: 100vw;
+  width: inherit;
+  justify-content: space-around;
+}
+
 .input {
-  margin-top: 60px;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+  font-size: 1em;
+  text-align: center;
+  border: 1px solid gray;
+  border-radius: 3px;
+}
+
+.submit {
+  margin-top: 10vw;
+  width: 20vw;
+  padding: 1vw;
+  color: white;
+  font-size: 1em;
+  background-color: #0099cc;
+  border: 1px solid #0099cc;
+  border-radius: 3px;
+  outline: none;
+  transition: background-color 0.2s ease;
+}
+
+.submit:hover {
+   background-color: #007399;
 }
