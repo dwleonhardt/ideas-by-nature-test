@@ -1,6 +1,7 @@
 import {
   EXCHANGE_SEND,
-  EXCHANGE_RECIEVE
+  EXCHANGE_RECIEVE,
+  CURRENCY_MODAL
 } from './types'
 
 export const ExchangeSend = send => {
@@ -14,5 +15,12 @@ export const ExchangeRecieve = recieve => {
   return {
     type: EXCHANGE_RECIEVE,
     payload: recieve
+  }
+}
+
+export const CurrencyModal = toggle => {
+  return {
+    type: CURRENCY_MODAL,
+    payload: toggle
   }
 }
