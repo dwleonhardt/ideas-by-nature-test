@@ -1,5 +1,5 @@
 import {
-  SOMETHING_AMAZING
+  EXCHANGE_SEND
 } from '../actions/types'
 
 const INITIAL_STATE = {
@@ -8,8 +8,8 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
   switch(action.type) {
-    case SOMETHING_AMAZING:
-      return { ...state, input: action.payload }
+    case EXCHANGE_SEND:
+      return { ...state, send: action.payload }
     default:
       return state
   }
