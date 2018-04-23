@@ -7,7 +7,6 @@ class Home extends Component {
 
   sendHandler(e) {
     this.props.ExchangeSend(e.target.value);
-    console.log(this.props.send, this.props.recieve);
   }
   recieveHandler(e) {
     this.props.ExchangeRecieve(e.target.value);
@@ -18,8 +17,8 @@ class Home extends Component {
       <div>
         <form className={style.exchangeForm}>
           <div className={style.inputs}>
-            <input className={style.input} placeholder="Send" onChange={ e => this.sendHandler(e)} />
-            <input className={style.input} placeholder="Recieve" onChange={ e => this.recieveHandler(e)}/>
+            <input className={style.input} type="number" placeholder="Send" onChange={ e => this.sendHandler(e)} />
+            <input className={style.input} type="number" placeholder="Recieve" onChange={ e => this.recieveHandler(e)}/>
           </div>
           <button className={style.submit} type="button">Submit</button>
         </form>
