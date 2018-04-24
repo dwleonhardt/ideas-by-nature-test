@@ -5,7 +5,17 @@ import {
 } from '../actions/types'
 
 const INITIAL_STATE = {
-  currencyModal: false,
+  modal: {
+    toggle: false
+  },
+  send: {
+    currency: 'BTC',
+    qty: 0
+  },
+  recieve: {
+    currency: 'ETH',
+    qty: 0
+  }
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -15,7 +25,7 @@ export default (state = INITIAL_STATE, action) => {
     case EXCHANGE_RECIEVE:
       return { ...state, recieve: action.payload }
     case CURRENCY_MODAL:
-      return { ...state, recieve: action.payload }
+      return { ...state, modal: action.payload }
     default:
       return state
   }

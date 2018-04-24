@@ -4,23 +4,32 @@ import {
   CURRENCY_MODAL
 } from './types'
 
-export const ExchangeSend = send => {
+export const ExchangeSend = ( currency, qty ) => {
   return {
     type: EXCHANGE_SEND,
-    payload: send
+    payload: {
+      currency: currency,
+      qty: qty
+    }
   }
 }
 
-export const ExchangeRecieve = recieve => {
+export const ExchangeRecieve = ( currency, qty ) => {
   return {
     type: EXCHANGE_RECIEVE,
-    payload: recieve
+    payload: {
+      currency: currency,
+      qty: qty
+    }
   }
 }
 
-export const CurrencyModal = toggle => {
+export const CurrencyModal = (toggle, setting) => {
   return {
     type: CURRENCY_MODAL,
-    payload: toggle
+    payload: {
+      toggle: toggle,
+      setting: setting
+    }
   }
 }
