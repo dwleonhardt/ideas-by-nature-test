@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ExchangeSend, ExchangeRecieve, CurrencyModal } from '../actions/ExchangeActions';
-import style from '../style/exchange.css';
 import CurrencySelect from './CurrencySelect'
+import style from '../style/exchange.css';
+import { icons } from '../assets/icons';
 
 class Exchange extends Component {
 
   sendHandler(e) {
+    console.log(icons);
     this.props.ExchangeSend(this.props.send, e.target.value);
   }
   recieveHandler(e) {
@@ -23,7 +25,7 @@ class Exchange extends Component {
           <div className={style.inputs}>
             <div className={style.col}>
               <img
-                className={style.coinIcon} src="https://upload.wikimedia.org/wikipedia/commons/4/46/Bitcoin.svg"
+                className={style.coinIcon} src={icons[this.props.send]}
                 alt="BTC"
                 onClick={() => this.openModal('Send')}
               >
@@ -33,7 +35,7 @@ class Exchange extends Component {
             </div>
             <div className={style.col}>
               <img
-                className={style.coinIcon} src="https://upload.wikimedia.org/wikipedia/commons/0/05/Ethereum_logo_2014.svg"
+                className={style.coinIcon} src={icons[this.props.recieve]}
                 alt="BTC"
                 onClick={() => this.openModal('Recieve')}
               >
