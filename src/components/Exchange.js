@@ -22,14 +22,7 @@ class Exchange extends Component {
       recieve: this.props.recieve
     }
 
-    fetch(`https://localhost:4000/exchange`, {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(exchange)
-    })
+    fetch(`http://localhost:4000/exchange?send=${exchange.send.currency}&recieve=${exchange.recieve.currency}`)
     .then((response) => response.json())
     .then((prices) => {
       let sendPrice = new Number(prices.sendPrice).toFixed(2);
@@ -76,9 +69,9 @@ class Exchange extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    send: state.reducer.send,
-    recieve: state.reducer.recieve,
-    modal: state.reducer.modal
+    send: state.send,
+    recieve: state.recieve,
+    modal: state.modal
   };
 }
 
