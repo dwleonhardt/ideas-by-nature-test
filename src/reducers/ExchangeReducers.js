@@ -14,7 +14,7 @@ const INITIAL_STATE = {
   },
   recieve: {
     currency: 'ETH',
-    qty: 0
+    qty: 'Recieve'
   }
 }
 
