@@ -1,6 +1,7 @@
 
-var express = require('express');
-var app = express();
+const express = require('express');
+const app = express();
+const port = process.env.PORT || 3000;
 
 if (process.env.NODE_ENV !== 'production') {
   const webpack = require('webpack')
@@ -15,4 +16,4 @@ if (process.env.NODE_ENV !== 'production') {
   }))
 }
 app.use(express.static(__dirname +'./../../public'));
-app.listen(3000);
+app.listen(port);
