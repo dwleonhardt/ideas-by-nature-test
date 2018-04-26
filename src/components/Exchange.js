@@ -22,7 +22,7 @@ class Exchange extends Component {
       recieve: this.props.recieve
     }
 
-    fetch('https://ideas-by-nature-test.herokuapp.com/exchange', {
+    fetch(`https://localhost:4000/exchange`, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -76,9 +76,9 @@ class Exchange extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    send: state.send,
-    recieve: state.recieve,
-    modal: state.modal
+    send: state.reducer.send,
+    recieve: state.reducer.recieve,
+    modal: state.reducer.modal
   };
 }
 

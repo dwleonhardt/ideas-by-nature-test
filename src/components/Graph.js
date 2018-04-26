@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Graph from './Graph';
 
 
-class MarketTrends extends Component {
+class Graph extends Component {
 
   render() {
     return (
-    <Graph />
+      <div>lol</div>
     )
   }
 
@@ -21,4 +20,4 @@ const mapStateToProps = (state) => {
   };
 }
 
-export default connect(mapStateToProps, {  })(MarketTrends);
+export default connect(mapStateToProps, {  })(Graph);
