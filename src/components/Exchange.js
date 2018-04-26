@@ -22,7 +22,7 @@ class Exchange extends Component {
       recieve: this.props.recieve
     }
 
-    fetch('http://localhost:3000/exchange', {
+    fetch('https://ideas-by-nature-test.herokuapp.com/exchange', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
