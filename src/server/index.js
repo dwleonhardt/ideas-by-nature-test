@@ -1,6 +1,6 @@
-
 const express = require('express');
 const app = express();
+const path = require('path');
 const port = process.env.PORT || 3000;
 
 if (process.env.NODE_ENV !== 'production') {
@@ -15,5 +15,12 @@ if (process.env.NODE_ENV !== 'production') {
     publicPath: config.output.publicPath
   }))
 }
-app.use(express.static(__dirname +'./../../public'));
+app.get('/*', function(req, res) {
+  res.sendFile(path.join(__dirname, './../../public/index.html'), function(err) {
+    if (err) {
+      res.status(500).send(err)
+    }
+  })
+})
+// app.use(express.static(__dirname +'./../../public'));
 app.listen(port);
