@@ -35,10 +35,11 @@ export const CurrencyModal = (toggle, setting) => {
   }
 }
 
-export const PriceGraph = (data) => {
+export const PriceGraph = (currency, data) => {
   return {
     type: PRICE_GRAPH,
     payload: {
+      currency: currency,
       data: data
     }
   }

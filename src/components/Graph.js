@@ -6,7 +6,9 @@ import * as d3 from 'd3';
 import style from '../style/graph.css';
 
 class Graph extends Component {
-  getPriceByDate (currency) {
+  componentDidMount() {
+    let currency = this.props.history.location.search.substring(1);
+    console.log(currency);
     let dayStart = moment.utc(moment().startOf('day')).format();
     let dayEnd = moment.utc(moment().endOf('day')).format();
     fetch(`https://ideas-by-nature-test.herokuapp.com/price_date?start=${dayStart}&end=${dayEnd}&currency=${currency}`)
@@ -17,7 +19,7 @@ class Graph extends Component {
         p.price = new Number(p.price).toFixed(2);
         p.time = new Date(p.time);
       })
-      this.props.PriceGraph(prices);
+      this.props.PriceGraph(this.props.currency, prices);
       this.createGraph();
     })
   }
@@ -39,7 +41,7 @@ class Graph extends Component {
       price.push(this.props.data[i].price);
       time.push(this.props.data[i].time);
     }
-    
+
     d3.selectAll("svg > *").remove();
 
     const y = d3.scaleLinear()
@@ -124,10 +126,6 @@ class Graph extends Component {
   render() {
     return (
       <div>
-        <h1 onClick={() => this.getPriceByDate('BTC')}>BTC</h1>
-        <h1 onClick={() => this.getPriceByDate('ETH')}>ETH</h1>
-        <h1 onClick={() => this.getPriceByDate('LTC')}>LTC</h1>
-        <h1 onClick={() => this.getPriceByDate('DASH')}>DASH</h1>
         <svg className={style.container}></svg>
       </div>
     )
@@ -139,7 +137,8 @@ class Graph extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    data: state.graph.data
+    data: state.graph.data,
+    currency: state.graph.currency
   };
 }
 
