@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Graph from './Graph';
+import moment from 'moment';
 
 
 class MarketTrends extends Component {
 
   render() {
     return (
-    <Graph />
+      <div>
+        <Graph />
+      </div>
     )
   }
 

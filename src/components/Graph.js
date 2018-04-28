@@ -6,10 +6,10 @@ import * as d3 from 'd3';
 import style from '../style/graph.css';
 
 class Graph extends Component {
-  getPriceByDate () {
+  getPriceByDate (currency) {
     let dayStart = moment.utc(moment().startOf('day')).format();
     let dayEnd = moment.utc(moment().endOf('day')).format();
-    fetch(`https://ideas-by-nature-test.herokuapp.com/price_date?start=${dayStart}&end=${dayEnd}&currency=BTC`)
+    fetch(`https://ideas-by-nature-test.herokuapp.com/price_date?start=${dayStart}&end=${dayEnd}&currency=${currency}`)
     .then((response) => response.json())
     .then((prices) => {
       prices = prices.reverse();
@@ -122,7 +122,7 @@ class Graph extends Component {
   render() {
     return (
       <div>
-        <h1 onClick={() => this.getPriceByDate()}>BTC</h1>
+        <h1 onClick={() => this.getPriceByDate('BTC')}>BTC</h1>
         <svg className={style.container}></svg>
       </div>
     )
