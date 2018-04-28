@@ -39,7 +39,9 @@ class Graph extends Component {
       price.push(this.props.data[i].price);
       time.push(this.props.data[i].time);
     }
-    console.log(this.props.data);
+    
+    d3.selectAll("svg > *").remove();
+
     const y = d3.scaleLinear()
     .domain([d3.min(price) -5, d3.max(price) + 5])
     .range([height, 0]);
@@ -123,6 +125,9 @@ class Graph extends Component {
     return (
       <div>
         <h1 onClick={() => this.getPriceByDate('BTC')}>BTC</h1>
+        <h1 onClick={() => this.getPriceByDate('ETH')}>ETH</h1>
+        <h1 onClick={() => this.getPriceByDate('LTC')}>LTC</h1>
+        <h1 onClick={() => this.getPriceByDate('DASH')}>DASH</h1>
         <svg className={style.container}></svg>
       </div>
     )
