@@ -12,6 +12,7 @@ class Graph extends Component {
     fetch(`https://ideas-by-nature-test.herokuapp.com/price_date?start=${dayStart}&end=${dayEnd}&currency=BTC`)
     .then((response) => response.json())
     .then((prices) => {
+      prices = prices.reverse();
       prices.map((p) => {
         p.price = new Number(p.price).toFixed(2);
         p.time = new Date(p.time);
@@ -38,6 +39,7 @@ class Graph extends Component {
       price.push(this.props.data[i].price);
       time.push(this.props.data[i].time);
     }
+    console.log(this.props.data);
     const y = d3.scaleLinear()
     .domain([d3.min(price) -5, d3.max(price) + 5])
     .range([height, 0]);
@@ -53,18 +55,29 @@ class Graph extends Component {
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+    const div = d3.select("body").append("div")
+    .attr("class", "tooltip")
+    .style("opacity", 0);
 
     const bar = chart.selectAll("g")
     .data(price)
     .enter().append("g")
     .attr('class', 'bar')
     .attr("transform", function(d, i) { return "translate(" + i * barWidth + ",0)"; })
-    .attr('data-price', function(d) { return '$' + d})
-    .attr('data-time', function(d, i) { return moment(time[i]).format('h:mm A')})
+    .on("mouseover", function(d) {
+       div.transition()
+         .duration(200)
+         .style("opacity", .9);
+       div.html(`$${d} <br/> ${moment(time[price.indexOf(d)]).format('h:mm A')}`)
+         .style("left", (d3.event.pageX) + "px")
+         .style("top", (d3.event.pageY - 28) + "px");
+       })
+     .on("mouseout", function(d) {
+       div.transition()
+         .duration(500)
+         .style("opacity", 0);
+       });
 
-    const div = d3.select("body").append("div")
-    .attr("class", "tooltip")
-    .style("opacity", 0);
 
 
     const xAxis = d3.axisBottom(x);
@@ -76,6 +89,7 @@ class Graph extends Component {
 
     yTicks.map(yTickFormat);
     xTicks.map(xTickFormat);
+
 
     chart.append("g")
       .attr("class", "x axis")
@@ -92,19 +106,7 @@ class Graph extends Component {
     })
     .attr("height", function(d) { return height - y(d); })
     .attr("width", barWidth - 1)
-    .on("mouseover", function(d) {
-       div.transition()
-         .duration(200)
-         .style("opacity", .9);
-       div.html(`$${d} <br/> ${bar.dataset}`)
-         .style("left", (d3.event.pageX) + "px")
-         .style("top", (d3.event.pageY - 28) + "px");
-       })
-     .on("mouseout", function(d) {
-       div.transition()
-         .duration(500)
-         .style("opacity", 0);
-       });
+
     chart.selectAll(".bar")
     .data(price)
     .enter().append("rect")
