@@ -1,7 +1,8 @@
 import {
   EXCHANGE_SEND,
   EXCHANGE_RECIEVE,
-  CURRENCY_MODAL
+  CURRENCY_MODAL,
+  PRICE_GRAPH
 } from '../actions/types'
 
 const INITIAL_STATE = {
@@ -15,6 +16,9 @@ const INITIAL_STATE = {
   recieve: {
     currency: 'ETH',
     qty: 'Recieve'
+  },
+  graph: {
+    data: {}
   }
 }
 
@@ -26,6 +30,8 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, recieve: action.payload }
     case CURRENCY_MODAL:
       return { ...state, modal: action.payload }
+    case PRICE_GRAPH:
+      return { ...state, graph: action.payload }
     default:
       return state
   }

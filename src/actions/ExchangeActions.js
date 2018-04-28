@@ -1,7 +1,8 @@
 import {
   EXCHANGE_SEND,
   EXCHANGE_RECIEVE,
-  CURRENCY_MODAL
+  CURRENCY_MODAL,
+  PRICE_GRAPH
 } from './types'
 
 export const ExchangeSend = ( currency, qty ) => {
@@ -30,6 +31,16 @@ export const CurrencyModal = (toggle, setting) => {
     payload: {
       toggle: toggle,
       setting: setting
+    }
+  }
+}
+
+export const PriceGraph = (currency, data) => {
+  return {
+    type: PRICE_GRAPH,
+    payload: {
+      currency: currency,
+      data: data
     }
   }
 }

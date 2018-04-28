@@ -22,14 +22,7 @@ class Exchange extends Component {
       recieve: this.props.recieve
     }
 
-    fetch('https://ideas-by-nature-test.herokuapp.com/exchange', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(exchange)
-    })
+    fetch(`https://ideas-by-nature-test.herokuapp.com/exchange?send=${exchange.send.currency}&recieve=${exchange.recieve.currency}`)
     .then((response) => response.json())
     .then((prices) => {
       let sendPrice = new Number(prices.sendPrice).toFixed(2);
