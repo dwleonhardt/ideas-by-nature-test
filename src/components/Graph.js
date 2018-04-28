@@ -39,7 +39,7 @@ class Graph extends Component {
       time.push(this.props.data[i].time);
     }
     const y = d3.scaleLinear()
-    .domain([d3.min(price) -5, d3.max(price) +5])
+    .domain([d3.min(price) -5, d3.max(price) + 5])
     .range([height, 0]);
 
     const x = d3.scaleTime()
@@ -69,6 +69,8 @@ class Graph extends Component {
     yTicks.map(yTickFormat);
     xTicks.map(xTickFormat);
 
+    console.log(typeof price[0].toString());
+
     chart.append("g")
       .attr("class", "x axis")
       .attr("transform", "translate(0," + height + ")")
@@ -85,11 +87,6 @@ class Graph extends Component {
     .attr("height", function(d) { return height - y(d); })
     .attr("width", barWidth - 1);
 
-    // bar.append("text")
-    //   .attr("x", d3.scaleBand().range([height, 0]))
-    //   .attr("y", function(d) { return y(d) + 3; })
-    //   .attr("dy", ".75em")
-    //   .text(function(d) { return d; });
 
     chart.selectAll(".bar")
     .data(price)

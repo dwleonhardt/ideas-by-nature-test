@@ -1,8 +1,13 @@
 .container rect {
   fill: steelblue;
 }
-.container text {
+.container text:y {
   /* fill: white; */
   font: 10px sans-serif;
-  text-anchor: middle;
+  text-anchor: end;
+}
+
+.container text:x {
+  font: 10px sans-serif;
+  text-anchor: end;
 }
