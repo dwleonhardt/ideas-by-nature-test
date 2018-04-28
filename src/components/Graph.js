@@ -55,7 +55,7 @@ class Graph extends Component {
 
 
     const bar = chart.selectAll("g")
-    .data(d)
+    .data(price)
     .enter().append("g")
     .attr('class', 'bar')
     .attr("transform", function(d, i) { return "translate(" + i * barWidth + ",0)"; })
