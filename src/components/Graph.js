@@ -35,7 +35,7 @@ class Graph extends Component {
 
     const barWidth = new Number(width / this.props.data.length);
     for (var i = 0; i < this.props.data.length; i++) {
-      price.push(new Number(this.props.data[i].price));
+      price.push(this.props.data[i].price);
       time.push(this.props.data[i].time);
     }
     const y = d3.scaleLinear()
@@ -55,9 +55,17 @@ class Graph extends Component {
 
 
     const bar = chart.selectAll("g")
-    .data(price)
+    .data(d)
     .enter().append("g")
-    .attr("transform", function(d, i) { return "translate(" + i * barWidth + ",0)"; });
+    .attr('class', 'bar')
+    .attr("transform", function(d, i) { return "translate(" + i * barWidth + ",0)"; })
+    .attr('data-price', function(d) { return '$' + d})
+    .attr('data-time', function(d, i) { return moment(time[i]).format('h:mm A')})
+
+    const div = d3.select("body").append("div")
+    .attr("class", "tooltip")
+    .style("opacity", 0);
+
 
     const xAxis = d3.axisBottom(x);
     const yAxis = d3.axisLeft(y)
@@ -68,8 +76,6 @@ class Graph extends Component {
 
     yTicks.map(yTickFormat);
     xTicks.map(xTickFormat);
-
-    console.log(typeof price[0].toString());
 
     chart.append("g")
       .attr("class", "x axis")
@@ -85,17 +91,29 @@ class Graph extends Component {
       return y(d);
     })
     .attr("height", function(d) { return height - y(d); })
-    .attr("width", barWidth - 1);
-
-
+    .attr("width", barWidth - 1)
+    .on("mouseover", function(d) {
+       div.transition()
+         .duration(200)
+         .style("opacity", .9);
+       div.html(`$${d} <br/> ${bar.dataset}`)
+         .style("left", (d3.event.pageX) + "px")
+         .style("top", (d3.event.pageY - 28) + "px");
+       })
+     .on("mouseout", function(d) {
+       div.transition()
+         .duration(500)
+         .style("opacity", 0);
+       });
     chart.selectAll(".bar")
     .data(price)
     .enter().append("rect")
-    .attr("class", "bar")
     .attr("x", function(d) { return x(d); })
     .attr("y", function(d) { return y(d); })
     .attr("height", function(d) { return height - y(d); })
-    .attr("width", d3.scaleBand().range([height, 0]));
+    .attr("width", d3.scaleBand().range([height, 0]))
+
+
 
 
   }
