@@ -28,7 +28,7 @@ class Graph extends Component {
     let weekStart = moment.utc(date.setDate(sunday)).format();
     let saturday = new Date().getDate() - today + (today === 0 ? -6:11);
     let weekEnd = moment.utc(date.setDate(saturday)).format();
-    fetch(`http://localhost:4000/price_date?start=${weekStart}&end=${weekEnd}&currency=BTC`)
+    fetch(`https://ideas-by-nature-test.herokuapp.com/price_date?start=${weekStart}&end=${weekEnd}&currency=BTC`)
     .then((response) => response.json())
     .then((prices) => {
       prices.map((p) => {
@@ -40,29 +40,30 @@ class Graph extends Component {
   }
 
   createGraph () {
-    console.log(d3);
-    const data = [];
+    const price = [];
+    const time = [];
     const margin = {
             top: 20,
             right: 30,
             bottom: 30,
-            left: 40
+            left: 60
           },
           width = 960 - margin.left - margin.right,
           height = 500 - margin.top - margin.bottom;
 
     const barWidth = new Number(width / this.props.data.length);
     for (var i = 0; i < this.props.data.length; i++) {
-      data.push(new Number(this.props.data[i].price));
+      price.push(new Number(this.props.data[i].price));
+      time.push(new Date(this.props.data[i].time));
     }
-    const y = d3.scalePow()
-    .exponent(35)
-    .domain([0, d3.max(data)])
+    console.log(d3);
+    const y = d3.scaleLinear()
+    .domain([d3.min(price) -5, d3.max(price) +5])
     .range([height, 0]);
 
-    const x = d3.scaleBand()
-    .range([0, width])
-    .round(.1);
+    const x = d3.scaleLinear()
+    .domain([d3.min(time), d3.max(time)])
+    .range([0, width]);
 
     const chart = d3.select(".container___3wpGl")
     .attr("width", width + margin.left + margin.right)
@@ -72,17 +73,34 @@ class Graph extends Component {
 
 
     const bar = chart.selectAll("g")
-    .data(data)
+    .data(price)
     .enter().append("g")
     .attr("transform", function(d, i) { return "translate(" + i * barWidth + ",0)"; });
 
+    const xAxis = d3.axisBottom(x);
+    const yAxis = d3.axisLeft(y)
+    const yTicks = y.ticks(),
+    yTickFormat = y.tickFormat(function(d) { return "$" + d; }),
+    xTicks = x.ticks(),
+    xTickFormat = x.tickFormat(function(d) { return d; })
 
-    const xAxis = d3.axisBottom(x)
+    yTicks.map(yTickFormat);
+    xTicks.map(xTickFormat);
 
     chart.append("g")
-    .attr("class", "x axis")
-    .attr("transform", "translate(0," + height + ")")
-    .call(xAxis);
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis);
+
+    chart.append("g")
+        .attr("class", "y axis")
+        .call(yAxis)
+        .append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 6)
+        .attr("dy", ".71em")
+        .style("text-anchor", "end")
+        .text("Frequency");
 
     bar.append("rect")
     .attr("y", function(d) {
@@ -91,11 +109,21 @@ class Graph extends Component {
     .attr("height", function(d) { return height - y(d); })
     .attr("width", barWidth - 1);
 
-    bar.append("text")
-    .attr("x", barWidth / 2)
-    .attr("y", function(d) { return y(d) + 3; })
-    .attr("dy", ".75em")
-    .text(function(d) { return d; });
+    // bar.append("text")
+    //   .attr("x", d3.scaleBand().range([height, 0]))
+    //   .attr("y", function(d) { return y(d) + 3; })
+    //   .attr("dy", ".75em")
+    //   .text(function(d) { return d; });
+
+    chart.selectAll(".bar")
+    .data(price)
+    .enter().append("rect")
+    .attr("class", "bar")
+    .attr("x", function(d) { return x(d); })
+    .attr("y", function(d) { return y(d); })
+    .attr("height", function(d) { return height - y(d); })
+    .attr("width", d3.scaleBand().range([height, 0]));
+
 
   }
   render() {
