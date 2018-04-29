@@ -15,7 +15,7 @@ if (process.env.NODE_ENV !== 'production') {
     publicPath: config.output.publicPath
   }))
 }
-app.use(express.static(path.join(__dirname, '../../public')))
+app.use(express.static(__dirname +'./../../public'));
 
 // app.get('/*', function(req, res) {
 //   res.sendFile(path.join(__dirname, './../../public/index.html'), function(err) {
