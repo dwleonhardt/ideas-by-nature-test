@@ -79,7 +79,7 @@ class Graph extends Component {
          .style('display', 'inline')
          .style('position', 'absolute')
          .style('background', '#c09bf7')
-         .style('font', '12px sans-serif')
+         .style('font', '0.7em sans-serif')
          .style('padding', '8px')
          .style('border-radius', '8px')
        })
