@@ -1,6 +1,9 @@
 .container rect {
   fill: steelblue;
 }
+.container rect:hover {
+  fill: red;
+}
 .container text:y {
   /* fill: white; */
   font: 10px sans-serif;
