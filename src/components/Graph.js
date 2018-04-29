@@ -9,9 +9,9 @@ class Graph extends Component {
   componentDidMount() {
     let currency = this.props.history.location.search.substring(1);
     console.log(currency);
-    let dayStart = moment.utc(moment().startOf('day')).format();
-    let dayEnd = moment.utc(moment().endOf('day')).format();
-    fetch(`https://ideas-by-nature-test.herokuapp.com/price_date?start=${dayStart}&end=${dayEnd}&currency=${currency}`)
+    let now = moment.utc(moment()).format();
+    let previousDay = moment.utc(moment().subtract(24, 'h').toDate()).format();
+    fetch(`https://ideas-by-nature-test.herokuapp.com/price_date?start=${previousDay}&end=${now}&currency=${currency}`)
     .then((response) => response.json())
     .then((prices) => {
       prices = prices.reverse();
