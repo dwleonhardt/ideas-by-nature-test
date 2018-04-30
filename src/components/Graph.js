@@ -10,7 +10,7 @@ class Graph extends Component {
     let currency = this.props.history.location.search.substring(1);
     let now = moment.utc(moment()).format();
     let previousDay = moment.utc(moment().subtract(24, 'h').toDate()).format();
-    fetch(`http://localhost:4000/price_date?start=${previousDay}&end=${now}&currency=${currency}`)
+    fetch(`https://ideas-by-nature-test.herokuapp.com/price_date?start=${previousDay}&end=${now}&currency=${currency}`)
     .then((response) => response.json())
     .then((prices) => {
       prices = prices.reverse();

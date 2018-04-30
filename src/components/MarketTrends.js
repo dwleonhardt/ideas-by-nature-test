@@ -9,7 +9,7 @@ import { icons } from '../assets/icons';
 class Markettdends extends Component {
   componentDidMount() {
     this.props.TrendsData({}, true);
-    fetch('http://localhost:4000/price_data')
+    fetch('https://ideas-by-nature-test.herokuapp.com/price_data')
     .then((response) => response.json())
     .then((prices) => {
       const data = {};
