@@ -42,7 +42,7 @@ class Graph extends Component {
     }
 
     d3.selectAll('svg > *').remove();
-
+    console.log(d3.max(price) - d3.min(price));
     const y = d3.scaleLinear()
     .domain([d3.min(price) -5, d3.max(price) + 5])
     .range([height, 0]);
