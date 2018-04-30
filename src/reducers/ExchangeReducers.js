@@ -2,7 +2,8 @@ import {
   EXCHANGE_SEND,
   EXCHANGE_RECIEVE,
   CURRENCY_MODAL,
-  PRICE_GRAPH
+  PRICE_GRAPH,
+  TRENDS_DATA
 } from '../actions/types'
 
 const INITIAL_STATE = {
@@ -19,6 +20,10 @@ const INITIAL_STATE = {
   },
   graph: {
     data: {}
+  },
+  trends: {
+    data: {},
+    loading: true
   }
 }
 
@@ -32,6 +37,8 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, modal: action.payload }
     case PRICE_GRAPH:
       return { ...state, graph: action.payload }
+    case TRENDS_DATA:
+      return { ...state, trends: action.payload }
     default:
       return state
   }
