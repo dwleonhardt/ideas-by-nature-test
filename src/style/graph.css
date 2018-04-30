@@ -1,3 +1,13 @@
+.flex {
+  display:flex;
+  flex-direction: column;
+}
+
+h1 {
+  text-align: center;
+  border-bottom: 1px solid rgb(190,190,190);
+}
+
 .container rect {
   fill: steelblue;
 }
@@ -5,7 +15,6 @@
   fill: red;
 }
 .container text:y {
-  /* fill: white; */
   font: 10px sans-serif;
   text-anchor: end;
 }

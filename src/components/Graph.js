@@ -8,10 +8,9 @@ import style from '../style/graph.css';
 class Graph extends Component {
   componentDidMount() {
     let currency = this.props.history.location.search.substring(1);
-    console.log(currency);
     let now = moment.utc(moment()).format();
     let previousDay = moment.utc(moment().subtract(24, 'h').toDate()).format();
-    fetch(`https://ideas-by-nature-test.herokuapp.com/price_date?start=${previousDay}&end=${now}&currency=${currency}`)
+    fetch(`http://localhost:4000/price_date?start=${previousDay}&end=${now}&currency=${currency}`)
     .then((response) => response.json())
     .then((prices) => {
       prices = prices.reverse();
@@ -19,7 +18,7 @@ class Graph extends Component {
         p.price = new Number(p.price).toFixed(2);
         p.time = new Date(p.time);
       })
-      this.props.PriceGraph(this.props.currency, prices);
+      this.props.PriceGraph(currency, prices);
       this.createGraph();
     })
   }
@@ -148,7 +147,8 @@ class Graph extends Component {
   }
   render() {
     return (
-      <div>
+      <div className={style.flex}>
+        <h1>{this.props.currency}</h1>
         <svg className={style.container}></svg>
       </div>
     )
