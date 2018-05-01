@@ -1,12 +1,14 @@
 .flex {
   display:flex;
   flex-direction: column;
+  padding-top: 10vh;
 }
 
-h1 {
-  text-align: center;
-  border-bottom: 1px solid rgb(190,190,190);
-}
+  h1 {
+    text-align: center;
+    border-bottom: 1px solid rgb(190,190,190);
+    font-family: 'Roboto', sans-serif;
+  }
 
 .container rect {
   fill: steelblue;
