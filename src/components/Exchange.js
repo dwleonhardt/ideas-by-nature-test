@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ExchangeSend, ExchangeRecieve, CurrencyModal } from '../actions/ExchangeActions';
-import CurrencySelect from './CurrencySelect'
+import CurrencySelect from './CurrencySelect';
+import Nav from './Nav';
 import style from '../style/exchange.css';
 import { icons } from '../assets/icons';
 
@@ -29,7 +30,6 @@ class Exchange extends Component {
       let recievePrice = new Number(prices.recievePrice).toFixed(2);
       let exchangeQty = ((sendPrice / recievePrice) * this.props.send.qty).toFixed(8);
       console.log(sendPrice / recievePrice)
-      // console.log(exchangeQty);
       this.props.ExchangeRecieve(this.props.recieve.currency, exchangeQty);
     })
   }
@@ -37,7 +37,8 @@ class Exchange extends Component {
   render() {
     return (
       <div>
-        <form className={style.exchangeForm}>
+        <Nav />
+        <form className={style.exchangeForm}  onSubmit={(e) => e.preventDefault()}>
           <div className={style.inputs}>
             <div className={style.col}>
               <img
@@ -59,7 +60,7 @@ class Exchange extends Component {
               <input className={style.input} placeholder="Recieve" value={this.props.recieve.qty} onChange={ e => this.recieveHandler(e)} disabled/>
             </div>
           </div>
-          <button className={style.submit} type="button" onClick={() => this.calculateExchange()}>Submit</button>
+          <button className={style.submit} type="submit" onClick={() => this.calculateExchange()}>Submit</button>
         </form>
         <CurrencySelect />
       </div>

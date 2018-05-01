@@ -32,3 +32,7 @@ tr:nth-child(odd) td {
   width: inherit;
   padding-right: 1vw;
 }
+
+.navPad {
+  padding-top: 20vh;
+}

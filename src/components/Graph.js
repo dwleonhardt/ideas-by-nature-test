@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { PriceGraph } from '../actions/ExchangeActions';
+import Nav from './Nav';
 import moment from 'moment';
 import * as d3 from 'd3';
 import style from '../style/graph.css';
@@ -147,9 +148,12 @@ class Graph extends Component {
   }
   render() {
     return (
-      <div className={style.flex}>
-        <h1>{this.props.currency}</h1>
-        <svg className={style.container}></svg>
+      <div>
+        <Nav />
+        <div className={style.flex}>
+          <h1>{this.props.currency}</h1>
+          <svg className={style.container}></svg>
+        </div>
       </div>
     )
   }
